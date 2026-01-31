@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heritage Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+        .chat-container {
+            width: 350px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        .chat-header {
+            background: #6b4f1d;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .chat-box {
+            height: 300px;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        .chat-box p {
+            margin: 5px 0;
+        }
+        .user {
+            text-align: right;
+            color: blue;
+        }
+        .bot {
+            text-align: left;
+            color: green;
+        }
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ccc;
+        }
+        input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+        button {
+            padding: 10px;
+            background: #6b4f1d;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">🏛️ Heritage Chatbot</div>
+    <div class="chat-box" id="chatBox">
+        <p class="bot">Hello! Ask me about Taj Mahal or Thanjavur Big Temple.</p>
+    </div>
+    <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Type your question...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+function sendMessage() {
+    const input = document.getElementById("userInput");
+    const chatBox = document.getElementById("chatBox");
+    const userText = input.value.toLowerCase();
+
+    if (userText === "") return;
+
+    chatBox.innerHTML += `<p class="user">${input.value}</p>`;
+
+    let botReply = "Sorry, I can answer only about Taj Mahal and Thanjavur Big Temple.";
+
+    // Taj Mahal
+    if (userText.includes("taj")) {
+        botReply = "The Taj Mahal is in Agra, Uttar Pradesh. It was built by Shah Jahan in memory of Mumtaz Mahal.";
+    }
+    else if (userText.includes("taj location")) {
+        botReply = "Taj Mahal is located in Agra, Uttar Pradesh, India.";
+    }
+
+    // Thanjavur Big Temple
+    else if (userText.includes("thanjavur") || userText.includes("big temple")) {
+        botReply = "Brihadeeswarar Temple is in Thanjavur, Tamil Nadu. It was built by Raja Raja Chola I.";
+    }
+    else if (userText.includes("temple location")) {
+        botReply = "Brihadeeswarar Temple is located in Thanjavur, Tamil Nadu, India.";
+    }
+
+    setTimeout(() => {
+        chatBox.innerHTML += `<p class="bot">${botReply}</p>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }, 500);
+
+    input.value = "";
+}
+</script>
+
+</body>
+</html>
